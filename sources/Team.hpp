@@ -14,7 +14,7 @@ public:
 
     Team(const std::string &name, double rating);
 
-    std::string &getName();
+    const std::string &getName();
 
     void setName(const std::string &name);
 

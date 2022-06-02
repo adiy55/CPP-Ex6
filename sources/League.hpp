@@ -15,6 +15,15 @@ private:
     std::vector<std::shared_ptr<Team>> _teams;
 //    const int MAX_PLAYERS{20};
 
+    void checkValidName(const std::string &name) const;
+
+    void fillMissingTeams();
+
+public:
+
+    League();
+
+    League(const std::initializer_list<std::shared_ptr<Team>> &teams);
 
 };
 
