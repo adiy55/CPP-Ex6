@@ -3,17 +3,22 @@
 
 #include <vector>
 
-class Schedule {
+namespace my_league {
 
-private:
-    int _n_teams;
-    std::vector<int> _schedule;
+    class Schedule {
 
-public:
+    private:
+        int _n_teams;
+        std::vector<int> _schedule;
 
-    void nextMatchUp();
+    public:
+
+        Schedule();
+
+        void nextMatchUp();
 
 
-};
+    };
+}
 
 #endif //CPP_EX6_SCHEDULE_HPP

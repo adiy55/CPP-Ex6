@@ -2,26 +2,32 @@
 #define CPP_EX6_TEAM_HPP
 
 #include <string>
+#include <iostream>
 
-class Team {
+namespace my_league {
 
-private:
+    class Team {
 
-    std::string _name;
-    double _rating;
+    private:
 
-public:
+        std::string _name;
+        double _rating;
 
-    Team(const std::string &name, double rating);
+    public:
 
-    const std::string &getName();
+        Team(const std::string &name, double rating);
 
-    void setName(const std::string &name);
+        const std::string &getName();
 
-    double getRating();
+        void setName(const std::string &name);
+
+        double getRating();
+
+        friend std::ostream &operator<<(std::ostream &out, const Team &team);
 
 //    void setRating(double rating);
 
-};
+    };
+}
 
 #endif //CPP_EX6_TEAM_HPP

@@ -1,10 +1,19 @@
 #include "Team.hpp"
 
-Team::Team(const std::string &name, double rating)
-        : _name{name}, _rating{rating} {}
+namespace my_league {
 
-const std::string &Team::getName() { return _name; }
+    Team::Team(const std::string &name, double rating)
+            : _name{name}, _rating{rating} {}
 
-void Team::setName(const std::string &name) { _name = name; }
+    const std::string &Team::getName() { return _name; }
 
-double Team::getRating() { return _rating; }
+    void Team::setName(const std::string &name) { _name = name; }
+
+    double Team::getRating() { return _rating; }
+
+    std::ostream &operator<<(std::ostream &out, const Team &team) {
+        out << "Team Name: " << team._name << ", Rating: " << team._rating << '\n';
+        return out;
+    }
+
+}

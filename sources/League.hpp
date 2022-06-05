@@ -7,24 +7,28 @@
 #include <memory>
 #include "Team.hpp"
 
-class League {
+namespace my_league {
 
-private:
+    class League {
 
-    std::set<std::string> _team_names;
-    std::vector<std::shared_ptr<Team>> _teams;
+    private:
+
+        std::set<std::string> _team_names;
+        std::vector<std::shared_ptr<Team>> _teams;
 //    const int MAX_PLAYERS{20};
 
-    void checkValidName(const std::string &name) const;
+        void checkValidName(const std::string &name) const;
 
-    void fillMissingTeams();
+        void fillMissingTeams();
 
-public:
+    public:
 
-    League();
+        League();
 
-    League(const std::initializer_list<std::shared_ptr<Team>> &teams);
+        League(const std::initializer_list<std::shared_ptr<Team>> &teams);
 
-};
+    };
+
+}
 
 #endif //CPP_EX6_LEAGUE_HPP
