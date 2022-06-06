@@ -12,7 +12,7 @@ namespace my_league {
     double Team::getRating() { return _rating; }
 
     std::ostream &operator<<(std::ostream &out, const Team &team) {
-        out << "Team Name: " << team._name << ", Rating: " << team._rating << '\n';
+        out << "{Name: " << team._name << ", Rating: " << team._rating << "}\n";
         return out;
     }
 

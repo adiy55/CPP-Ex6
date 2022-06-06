@@ -4,6 +4,10 @@
 
 using namespace my_league;
 
+/*
+ * https://en.wikipedia.org/wiki/Wikipedia:WikiProject_National_Basketball_Association/National_Basketball_Association_team_abbreviations
+ */
+
 int main() {
 
     std::shared_ptr<Team> gsw = std::make_shared<Team>("Golden State Warriors", 0.99);
@@ -30,6 +34,9 @@ int main() {
 
     League nba{{gsw, atl, bos, bkn, cha, chi, dal, den, lac, lal, mem, mia, mil, min, nop, phi, phx, tor, uta, was}};
     std::cout << nba;
+    for (int i = 0; i < 19; ++i) {
+        nba.play();
+    }
 
     return 0;
 }

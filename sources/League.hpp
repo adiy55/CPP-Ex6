@@ -6,6 +6,7 @@
 #include <string>
 #include <memory>
 #include "Team.hpp"
+#include "Schedule.hpp"
 
 namespace my_league {
 
@@ -15,6 +16,8 @@ namespace my_league {
 
         std::set<std::string> _team_names;
         std::vector<std::shared_ptr<Team>> _teams;
+        Schedule _schedule;
+
 //    const int MAX_PLAYERS{20};
 
         void checkValidName(const std::string &name) const;
@@ -26,6 +29,8 @@ namespace my_league {
         League();
 
         League(const std::initializer_list<std::shared_ptr<Team>> &teams);
+
+        void play();
 
         friend std::ostream &operator<<(std::ostream &out, const League &league);
 

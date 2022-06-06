@@ -1,7 +1,7 @@
 #ifndef CPP_EX6_SCHEDULE_HPP
 #define CPP_EX6_SCHEDULE_HPP
 
-#include <vector>
+#include <queue>
 
 namespace my_league {
 
@@ -9,14 +9,22 @@ namespace my_league {
 
     private:
         int _n_teams;
-        std::vector<int> _schedule;
+        bool _swap_teams;
+        bool _is_even;
+        int _start;
+        int _end;
+        int _mid;
+        std::queue<std::pair<int, int>> _matches;
+
+        void nextRound();
 
     public:
 
         Schedule();
 
-        void nextMatchUp();
+        void initTeams(int n_teams);
 
+        std::pair<int, int> nextMatchUp();
 
     };
 }
