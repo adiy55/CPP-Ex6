@@ -15,4 +15,9 @@ namespace my_league {
         if (_team_names.contains(name)) { throw std::runtime_error{"Team name already exits!"}; }
     }
 
+    std::ostream &operator<<(std::ostream &out, const League &league) {
+        for (const std::shared_ptr<Team> &team: league._teams) { out << (*team); }
+        return out;
+    }
+
 }

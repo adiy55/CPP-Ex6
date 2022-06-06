@@ -27,6 +27,8 @@ namespace my_league {
 
         League(const std::initializer_list<std::shared_ptr<Team>> &teams);
 
+        friend std::ostream &operator<<(std::ostream &out, const League &league);
+
     };
 
 }
