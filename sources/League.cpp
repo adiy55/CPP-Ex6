@@ -38,3 +38,15 @@ namespace my_league {
     }
 
 }
+
+/*
+ * organize teams by conditions
+ * stats:
+ * - top n teams (given n)
+ * - longest winning streak
+ * - longest losing streak
+ * - teams that scored more than opponent scored
+ *
+ * - avg pts per game (need to save num games played)
+ * - teams that scored less than opponent scored
+ */

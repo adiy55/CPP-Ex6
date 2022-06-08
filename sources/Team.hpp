@@ -12,6 +12,14 @@ namespace my_league {
 
         std::string _name;
         double _rating;
+        int _pts_scored{0};
+        int _pts_opponent_scored{0};
+        int _win_streak{0};
+        int _loss_streak{0};
+        int _win_counter{0};
+        int _loss_counter{0};
+        int _total_wins{0};
+        int _total_losses{0};
 
     public:
 
@@ -22,6 +30,12 @@ namespace my_league {
         void setName(const std::string &name);
 
         double getRating();
+
+        void addPoints(int scored, int opponent_scored);
+
+        void addWin();
+
+        void addLoss();
 
         friend std::ostream &operator<<(std::ostream &out, const Team &team);
 

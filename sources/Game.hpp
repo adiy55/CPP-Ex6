@@ -12,7 +12,7 @@ namespace my_league {
         int _pts_home;
         int _pts_away;
 
-        int shotAttempt();
+        void updateResults(Team &home, Team &away) const;
 
     public:
 

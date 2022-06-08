@@ -18,25 +18,6 @@ namespace my_league {
         _mid = static_cast<int>(_n_teams / 2);
     }
 
-//    std::pair<int, int> Schedule::nextMatchUp() {
-//        if (_curr_mid == _mid) {
-//            _start = _end;
-//            --_end;
-//            _curr_start = _start;
-//            _curr_end = _end;
-//        }
-//        if (_end <= 0) {
-//            if (!_swap_teams) { _swap_teams = true; }
-//            else { std::cout << "Season is over!"; }
-//        }
-//        if (!_is_even && _curr_end == _end) {
-//            return _swap_teams ? std::pair{_end, 0} : std::pair{0, _end};
-//        }
-//        if (_curr_start % (_n_teams) == 0) { _curr_start = 1; }
-//        if (_curr_end == 0) { _curr_end = (_n_teams) - 1; }
-//        return _swap_teams ? std::pair{_curr_end--, _curr_start++} : std::pair{_curr_start++, _curr_end--};
-//    }
-
     std::pair<int, int> Schedule::nextMatchUp() {
         if (_end <= 0) {
             if (!_swap_teams) { _swap_teams = true; }

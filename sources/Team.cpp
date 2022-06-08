@@ -11,6 +11,25 @@ namespace my_league {
 
     double Team::getRating() { return _rating; }
 
+    void Team::addPoints(int scored, int opponent_scored) {
+        _pts_scored += scored;
+        _pts_opponent_scored += opponent_scored;
+    }
+
+    void Team::addWin() {
+        ++_total_wins;
+        ++_win_counter;
+        _loss_counter = 0;
+        if (_win_streak < _win_counter) { _win_streak = _win_counter; }
+    }
+
+    void Team::addLoss() {
+        ++_total_losses;
+        ++_loss_counter;
+        _win_counter = 0;
+        if (_loss_streak < _loss_counter) { _loss_streak = _loss_counter; }
+    }
+
     std::ostream &operator<<(std::ostream &out, const Team &team) {
         out << "{Name: " << team._name << ", Rating: " << team._rating << "}\n";
         return out;
