@@ -30,9 +30,17 @@ namespace my_league {
         if (_loss_streak < _loss_counter) { _loss_streak = _loss_counter; }
     }
 
+    int Team::getTotalWins() const { return _total_wins; }
+
+    int Team::getTotalLosses() const { return _total_losses; }
+
     std::ostream &operator<<(std::ostream &out, const Team &team) {
         out << "{Name: " << team._name << ", Rating: " << team._rating << "}\n";
         return out;
     }
+
+    int Team::getPtsScored() const { return _pts_scored; }
+
+    int Team::getPtsOpponentScored() const { return _pts_opponent_scored; }
 
 }

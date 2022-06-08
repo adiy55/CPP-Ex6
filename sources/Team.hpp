@@ -37,6 +37,14 @@ namespace my_league {
 
         void addLoss();
 
+        int getTotalWins() const;
+
+        int getTotalLosses() const;
+
+        int getPtsScored() const;
+
+        int getPtsOpponentScored() const;
+
         friend std::ostream &operator<<(std::ostream &out, const Team &team);
 
 //    void setRating(double rating);
