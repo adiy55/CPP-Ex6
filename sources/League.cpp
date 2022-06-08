@@ -1,5 +1,6 @@
 #include "League.hpp"
 #include "Constants.cpp"
+#include "Game.hpp"
 
 using constants::MAX_PLAYERS;
 
@@ -29,9 +30,11 @@ namespace my_league {
 
     void League::play() {
         auto[home, away] = _schedule.nextMatchUp();
-        std::cout << "Playing:\n"
+        std::cout << "\nPlaying:\n"
                   << "Home Team: no." << home << " " << *_teams[static_cast<std::size_t>(home)]
                   << "Away Team: no." << away << " " << *_teams[static_cast<std::size_t>(away)];
+        Game game{};
+        game.simulateGame(*_teams[static_cast<std::size_t>(home)], *_teams[static_cast<std::size_t>(away)]);
     }
 
 }
