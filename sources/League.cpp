@@ -37,6 +37,19 @@ namespace my_league {
         game.simulateGame(*_teams[static_cast<std::size_t>(home)], *_teams[static_cast<std::size_t>(away)]);
     }
 
+    void League::sortTeams() {
+        std::sort(_teams.cbegin(), _teams.cend(), [](Team &a, Team &b) {
+            int a_diff = a.getTotalWins() - a.getTotalLosses();
+            int b_diff = b.getTotalWins() - b.getTotalLosses();
+            if (a_diff > b_diff) { return a; }
+            else if (b_diff > a_diff) { return b; }
+            a_diff = a.getPtsScored() - a.getPtsOpponentScored();
+            b_diff = b.getPtsScored() - b.getPtsOpponentScored();
+            if (a_diff > b_diff) { return a; }
+            return b;
+        });
+    }
+
 }
 
 /*

@@ -30,6 +30,8 @@ namespace my_league {
 
         void play();
 
+        void sortTeams();
+
         friend std::ostream &operator<<(std::ostream &out, const League &league);
 
     };
