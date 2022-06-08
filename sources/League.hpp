@@ -22,15 +22,19 @@ namespace my_league {
 
         void fillMissingTeams();
 
+        void play();
+
+        void sortTeams();
+
     public:
 
         League();
 
         League(const std::initializer_list<std::shared_ptr<Team>> &teams);
 
-        void play();
+        void playAll();
 
-        void sortTeams();
+        void displayStandings(int n_first = 5);
 
         friend std::ostream &operator<<(std::ostream &out, const League &league);
 

@@ -35,12 +35,12 @@ int main() {
 
     League nba{{gsw, atl, bos, bkn, cha, chi, dal, den, lac, lal, mem, mia, mil, min, nop, phi, phx, tor, uta, was}};
     std::cout << nba;
-    for (int i = 0; i < 38; ++i) {
-        nba.play();
-    }
-//    Game game{};
-//    game.simulateGame(*gsw, *lal);
+//    for (int i = 0; i < 38; ++i) {
+//        nba.play();
+//    }
 
+    nba.playAll();
+//    nba.displayStandings(5);
 
     return 0;
 }

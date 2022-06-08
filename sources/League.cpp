@@ -37,17 +37,34 @@ namespace my_league {
         game.simulateGame(*_teams[static_cast<std::size_t>(home)], *_teams[static_cast<std::size_t>(away)]);
     }
 
+    void League::playAll() {
+        // _teams.size()-1 = num of rounds, _teams.size()/2 = games per round
+        int n_teams = static_cast<int>(_teams.size());
+        int games_per_season = (n_teams - 1) * (n_teams / 2) * 2;
+        for (int i = 0; i < games_per_season; ++i) {
+            this->play();
+        }
+        this->sortTeams();
+    }
+
     void League::sortTeams() {
-        std::sort(_teams.cbegin(), _teams.cend(), [](Team &a, Team &b) {
-            int a_diff = a.getTotalWins() - a.getTotalLosses();
-            int b_diff = b.getTotalWins() - b.getTotalLosses();
+        std::sort(_teams.begin(), _teams.end(), [](std::shared_ptr<Team> &a, std::shared_ptr<Team> &b) {
+            int a_diff = a->getTotalWins() - a->getTotalLosses();
+            int b_diff = b->getTotalWins() - b->getTotalLosses();
             if (a_diff > b_diff) { return a; }
             else if (b_diff > a_diff) { return b; }
-            a_diff = a.getPtsScored() - a.getPtsOpponentScored();
-            b_diff = b.getPtsScored() - b.getPtsOpponentScored();
+            a_diff = a->getPtsScored() - a->getPtsOpponentScored();
+            b_diff = b->getPtsScored() - b->getPtsOpponentScored();
             if (a_diff > b_diff) { return a; }
             return b;
         });
+    }
+
+    void League::displayStandings(int n_first) {
+        std::cout << "Top " << n_first << "teams in the league:\n";
+        for (int i = 0; i < n_first; ++i) {
+            std::cout << i << "." << *_teams[static_cast<std::size_t>(i)] << '\n';
+        }
     }
 
 }

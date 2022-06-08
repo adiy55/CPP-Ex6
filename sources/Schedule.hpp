@@ -18,6 +18,8 @@ namespace my_league {
 
         void nextRound();
 
+        void initMatchups();
+
     public:
 
         Schedule();
