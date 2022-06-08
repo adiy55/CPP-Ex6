@@ -1,6 +1,7 @@
 #include <iostream>
 #include "League.hpp"
 #include "Team.hpp"
+#include "Game.hpp"
 
 using namespace my_league;
 
@@ -37,6 +38,9 @@ int main() {
     for (int i = 0; i < 19; ++i) {
         nba.play();
     }
+    Game game{};
+    game.simulateGame(*gsw, *lal);
+
 
     return 0;
 }

@@ -1,14 +1,19 @@
 #include "League.hpp"
+#include "Constants.cpp"
+
+using constants::MAX_PLAYERS;
 
 namespace my_league {
 
     League::League(const std::initializer_list<std::shared_ptr<Team>> &teams)
             : _schedule{} {
-        // todo: throw exception if given more than 20 teams?
+        int counter = 0;
         for (const std::shared_ptr<Team> &team: teams) {
+            if (counter >= MAX_PLAYERS) { throw std::runtime_error{"Exceeded max number of teams!"}; }
             _teams.emplace_back(team);
             this->checkValidName(team->getName());
             _team_names.emplace(team->getName());
+            ++counter;
         }
         _schedule.initTeams(static_cast<int>(teams.size()));
     }

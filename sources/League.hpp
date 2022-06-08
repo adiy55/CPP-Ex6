@@ -1,7 +1,7 @@
 #ifndef CPP_EX6_LEAGUE_HPP
 #define CPP_EX6_LEAGUE_HPP
 
-#include <set>
+#include <unordered_set>
 #include <vector>
 #include <string>
 #include <memory>
@@ -14,11 +14,9 @@ namespace my_league {
 
     private:
 
-        std::set<std::string> _team_names;
+        std::unordered_set<std::string> _team_names;
         std::vector<std::shared_ptr<Team>> _teams;
         Schedule _schedule;
-
-//    const int MAX_PLAYERS{20};
 
         void checkValidName(const std::string &name) const;
 
