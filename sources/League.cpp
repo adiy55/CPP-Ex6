@@ -33,8 +33,8 @@ namespace my_league {
         std::cout << "\nPlaying:\n"
                   << "Home Team: no." << home << " " << *_teams[static_cast<std::size_t>(home)]
                   << "Away Team: no." << away << " " << *_teams[static_cast<std::size_t>(away)];
-        Game game{};
-        game.simulateGame(*_teams[static_cast<std::size_t>(home)], *_teams[static_cast<std::size_t>(away)]);
+        Game game{_teams[static_cast<std::size_t>(home)], _teams[static_cast<std::size_t>(away)]};
+        game.simulateGame();
     }
 
     void League::playAll() {
@@ -51,12 +51,9 @@ namespace my_league {
         std::sort(_teams.begin(), _teams.end(), [](std::shared_ptr<Team> &a, std::shared_ptr<Team> &b) {
             int a_diff = a->getTotalWins() - a->getTotalLosses();
             int b_diff = b->getTotalWins() - b->getTotalLosses();
-            if (a_diff > b_diff) { return a; }
-            else if (b_diff > a_diff) { return b; }
-            a_diff = a->getPtsScored() - a->getPtsOpponentScored();
-            b_diff = b->getPtsScored() - b->getPtsOpponentScored();
-            if (a_diff > b_diff) { return a; }
-            return b;
+            if (a_diff > b_diff) { return true; }
+            else if (b_diff > a_diff) { return false; }
+            return a->getPtsScored() - a->getPtsOpponentScored() >= b->getPtsScored() - b->getPtsOpponentScored();
         });
     }
 
