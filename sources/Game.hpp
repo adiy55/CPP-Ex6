@@ -2,6 +2,7 @@
 #define CPP_EX6_GAME_HPP
 
 #include <random>
+#include <memory>
 #include "Team.hpp"
 
 namespace my_league {
@@ -9,16 +10,18 @@ namespace my_league {
     class Game {
 
     private:
+        std::shared_ptr<Team> _home;
+        std::shared_ptr<Team> _away;
         int _pts_home;
         int _pts_away;
 
-        void updateResults(Team &home, Team &away) const;
+        void updateResults();
 
     public:
 
-        Game();
+        Game(std::shared_ptr<Team> &home, std::shared_ptr<Team> &away);
 
-        void simulateGame(Team &home, Team &away);
+        void simulateGame();
 
     };
 
