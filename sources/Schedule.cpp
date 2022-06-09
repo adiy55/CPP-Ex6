@@ -28,12 +28,12 @@ namespace my_league {
 
     void Schedule::initMatchups() {
         std::queue<std::pair<int, int>> swapped_matches{};
-        for (; _end >= 0; --_end) {
+        for (; _end > 0; --_end) {
             int curr_start = _start, curr_end = _end;
             if (_is_even) {
                 _matches.emplace(0, curr_end);
                 swapped_matches.emplace(curr_end, 0);
-                -- curr_end;
+                --curr_end;
             }
             for (int i = 1; i < _mid; ++i) {
                 if (curr_start % _n_teams == 0) curr_start = 1; // index 0 is fixed
