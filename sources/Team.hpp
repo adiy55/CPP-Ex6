@@ -47,6 +47,10 @@ namespace my_league {
 
         friend std::ostream &operator<<(std::ostream &out, const Team &team);
 
+        int getWinStreak() const;
+
+        int getLossStreak() const;
+
 //    void setRating(double rating);
 
     };

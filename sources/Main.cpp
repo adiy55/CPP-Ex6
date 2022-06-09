@@ -41,6 +41,8 @@ int main() {
 
     nba.playAll();
     nba.displayStandings(5);
-
+    nba.displayLongestWinningStreak();
+    nba.displayLongestLosingStreak();
+    nba.displayNumTeamsScoredMore();
     return 0;
 }

@@ -64,6 +64,31 @@ namespace my_league {
         }
     }
 
+    void League::displayLongestWinningStreak() {
+        int longest = 0, curr_longest = 0;
+        std::for_each(_teams.cbegin(), _teams.cend(), [&longest, &curr_longest](const std::shared_ptr<Team> &team) {
+            if (team->getWinStreak() > curr_longest) { longest = curr_longest = team->getWinStreak(); }
+        });
+        std::cout << "The longest winning streak is: " << longest << '\n';
+    }
+
+    void League::displayLongestLosingStreak() {
+        int longest = 0, curr_longest = 0;
+        std::for_each(_teams.cbegin(), _teams.cend(), [&longest, &curr_longest](const std::shared_ptr<Team> &team) {
+            if (team->getLossStreak() > curr_longest) { longest = curr_longest = team->getLossStreak(); }
+        });
+        std::cout << "The longest losing streak is: " << longest << '\n';
+    }
+
+    void League::displayNumTeamsScoredMore() {
+        int counter = 0;
+        std::for_each(_teams.cbegin(), _teams.cend(), [&counter](const std::shared_ptr<Team> &team) {
+            if (team->getPtsScored() > team->getPtsOpponentScored()) { ++counter; }
+        });
+        std::cout << "Number of Teams that scored more than their opponent: " << counter << '\n';
+    }
+
+
 }
 
 /*

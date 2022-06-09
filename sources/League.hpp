@@ -36,6 +36,12 @@ namespace my_league {
 
         void displayStandings(int n_first = 5);
 
+        void displayLongestWinningStreak();
+
+        void displayLongestLosingStreak();
+
+        void displayNumTeamsScoredMore();
+
         friend std::ostream &operator<<(std::ostream &out, const League &league);
 
     };

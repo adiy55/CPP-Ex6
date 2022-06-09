@@ -39,6 +39,10 @@ namespace my_league {
         return out;
     }
 
+    int Team::getWinStreak() const { return _win_streak; }
+
+    int Team::getLossStreak() const { return _loss_streak; }
+
     int Team::getPtsScored() const { return _pts_scored; }
 
     int Team::getPtsOpponentScored() const { return _pts_opponent_scored; }
