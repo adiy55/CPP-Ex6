@@ -35,7 +35,7 @@ namespace my_league {
     int Team::getTotalLosses() const { return _total_losses; }
 
     std::ostream &operator<<(std::ostream &out, const Team &team) {
-        out << "{Name: " << team._name << ", Rating: " << team._rating << "}\n";
+        out << "{Name: " << team._name << ", Rating: " << team._rating << "}";
         return out;
     }
 

@@ -24,15 +24,15 @@ namespace my_league {
     }
 
     std::ostream &operator<<(std::ostream &out, const League &league) {
-        for (const std::shared_ptr<Team> &team: league._teams) { out << (*team); }
+        for (const std::shared_ptr<Team> &team: league._teams) { out << (*team) << '\n'; }
         return out;
     }
 
     void League::play() {
         auto[home, away] = _schedule.nextMatchUp();
-        std::cout << "\nPlaying:\n"
-                  << "Home Team: no." << home << " " << *_teams[static_cast<std::size_t>(home)]
-                  << "Away Team: no." << away << " " << *_teams[static_cast<std::size_t>(away)];
+//        std::cout << "\nPlaying: "
+//                  << "Home: no." << home << " " << *_teams[static_cast<std::size_t>(home)] << ", Away: no." << away
+//                  << " " << *_teams[static_cast<std::size_t>(away)];
         Game game{_teams[static_cast<std::size_t>(home)], _teams[static_cast<std::size_t>(away)]};
         game.simulateGame();
     }
@@ -58,9 +58,9 @@ namespace my_league {
     }
 
     void League::displayStandings(int n_first) {
-        std::cout << "Top " << n_first << "teams in the league:\n";
+        std::cout << "\nTop " << n_first << " teams in the league:\n";
         for (int i = 0; i < n_first; ++i) {
-            std::cout << i << "." << *_teams[static_cast<std::size_t>(i)] << '\n';
+            std::cout << (i + 1) << "." << *_teams[static_cast<std::size_t>(i)] << '\n';
         }
     }
 

@@ -40,7 +40,7 @@ int main() {
 //    }
 
     nba.playAll();
-//    nba.displayStandings(5);
+    nba.displayStandings(5);
 
     return 0;
 }
