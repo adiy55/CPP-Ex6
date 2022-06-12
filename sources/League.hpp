@@ -42,6 +42,8 @@ namespace my_league {
 
         void displayNumTeamsScoredMore();
 
+        void displayAvgPtsPerGame();
+
         friend std::ostream &operator<<(std::ostream &out, const League &league);
 
     };

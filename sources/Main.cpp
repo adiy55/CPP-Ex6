@@ -44,5 +44,6 @@ int main() {
     nba.displayLongestWinningStreak();
     nba.displayLongestLosingStreak();
     nba.displayNumTeamsScoredMore();
+    nba.displayAvgPtsPerGame();
     return 0;
 }
