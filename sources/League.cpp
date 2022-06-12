@@ -97,7 +97,17 @@ namespace my_league {
         }
     }
 
-
+    void League::displayTopScoring(int n_teams) {
+        std::sort(_teams.begin(), _teams.end(),
+                  [](std::shared_ptr<Team> &a, std::shared_ptr<Team> &b) {
+                      return a->getPtsScored() > b->getPtsScored();
+                  });
+        for (unsigned int i = 0; i < n_teams; ++i) {
+            std::shared_ptr<Team> &team = _teams[i];
+            std::cout << (i + 1) << ". " << team->getName() << ": Scored " << team->getPtsScored() << " points\n";
+        }
+        this->sortTeams();
+    }
 }
 
 /*
@@ -106,8 +116,8 @@ namespace my_league {
  * - top n teams (given n)
  * - longest winning streak
  * - longest losing streak
- * - teams that scored more than opponent scored
+ * - num teams that scored more than opponent scored
  *
  * - avg pts per game (need to save num games played)
- * - teams that scored less than opponent scored
+ * - top scoring teams
  */
