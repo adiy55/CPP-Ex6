@@ -26,6 +26,10 @@ namespace my_league {
 
         void sortTeams();
 
+        static std::string generateRandomName();
+
+        static double generateRandomRating();
+
     public:
 
         League();

@@ -33,7 +33,8 @@ int main() {
     std::shared_ptr<Team> was = std::make_shared<Team>("Washington Wizards", 0.66);
     std::cout << *gsw;
 
-    League nba{{gsw, atl, bos, bkn, cha, chi, dal, den, lac, lal, mem, mia, mil, min, nop, phi, phx, tor, uta, was}};
+//    League nba{{gsw, atl, bos, bkn, cha, chi, dal, den, lac, lal, mem, mia, mil, min, nop, phi, phx, tor, uta, was}};
+    League nba{{gsw, atl, bos, bkn, cha, chi, dal, den, lac, lal, mem, mia, mil, min, nop, phi, phx, tor, uta}};
     std::cout << nba;
 //    for (int i = 0; i < 38; ++i) {
 //        nba.play();
