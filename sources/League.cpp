@@ -16,13 +16,12 @@ namespace my_league {
             _team_names.emplace(team->getName());
             ++counter;
         }
-        while (counter < MAX_PLAYERS) {
-            std::string new_name = generateRandomName();
-            if (_team_names.count(new_name) == 0) {
-                _teams.push_back(std::make_shared<Team>(new_name, generateRandomRating())); // todo: check for leaks
-                ++counter;
-            }
-        }
+        this->fillMissingTeams(counter);
+        _schedule.initTeams(static_cast<int>(_teams.size()));
+    }
+
+    League::League() {
+        this->fillMissingTeams(0);
         _schedule.initTeams(static_cast<int>(_teams.size()));
     }
 
@@ -121,14 +120,25 @@ namespace my_league {
         std::random_device rd;
         std::mt19937 generator(rd());
         std::shuffle(str.begin(), str.end(), generator);
-        return str.substr(0, 2);
+        return str.substr(0, 5);
     }
 
     double League::generateRandomRating() {
         std::random_device rd;  // Will be used to obtain a seed for the random number engine
         std::mt19937 gen(rd()); // Standard mersenne_twister_engine seeded with rd()
         std::uniform_real_distribution<> dis(0.0, 1.0);
-        return dis(gen);
+        return std::round(dis(gen) * 100.0) / 100.0;
+    }
+
+    void League::fillMissingTeams(int counter) {
+        while (counter < MAX_PLAYERS) {
+            std::string new_name = generateRandomName();
+            if (_team_names.count(new_name) == 0) {
+                _teams.push_back(std::make_shared<Team>(new_name, generateRandomRating())); // todo: check for leaks
+                _team_names.emplace(new_name);
+                ++counter;
+            }
+        }
     }
 }
 

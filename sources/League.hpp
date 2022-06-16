@@ -20,7 +20,7 @@ namespace my_league {
 
         void checkValidName(const std::string &name) const;
 
-        void fillMissingTeams();
+        void fillMissingTeams(int counter);
 
         void play();
 

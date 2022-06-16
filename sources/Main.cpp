@@ -47,5 +47,9 @@ int main() {
     nba.displayNumTeamsScoredMore();
     nba.displayAvgPtsPerGame();
     nba.displayTopScoring();
+
+    League random_league;
+    std::cout << random_league;
+
     return 0;
 }
