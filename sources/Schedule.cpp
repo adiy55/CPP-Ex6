@@ -5,7 +5,7 @@ namespace my_league {
 
     // (n_teams-1) rounds of matchups x 2
     Schedule::Schedule()
-            : _n_teams{0}, _swap_teams{false}, _is_even{true}, _start{0}, _end{0}, _mid{0} {}
+            : _n_teams{0}, _is_even{true} {}
 
     void Schedule::initTeams(int n_teams) {
         _n_teams = n_teams;
@@ -37,7 +37,6 @@ namespace my_league {
             if (_is_even) {
                 _matches.emplace(0, curr_end);
                 swapped_matches.emplace(curr_end, 0);
-//                std::cout << 0 << curr_end << " ";
                 --curr_end;
             }
             for (int i = 1; i < _mid; ++i) { // until mid -> matches two teams each iteration
@@ -45,7 +44,6 @@ namespace my_league {
                 if (curr_end == 0) curr_end = _n_teams - 1; // reset to last end
                 _matches.emplace(curr_start, curr_end);
                 swapped_matches.emplace(curr_end, curr_start);
-//                std::cout << curr_start << curr_end << " ";
                 ++curr_start;
                 --curr_end;
             }
@@ -57,38 +55,38 @@ namespace my_league {
         }
     }
 
-//    void Schedule::initMatchups() {
-//        std::vector<int> row1;
-//        std::vector<int> row2;
-//        std::queue<std::pair<int, int>> swapped_matches{};
-//        for (int i = 0; i < _n_teams; ++i) { // init indices
-//            if (i < _mid) { row1.push_back(i); }
-//            else { row2.push_back(i); }
-//        }
-//        std::reverse(row2.begin(), row2.end());
-//        for (int i = 1; i < _n_teams; ++i) { // first matchups are already set, need to alternate 1 iteraton less
-//            for (unsigned int j = 0; j < _mid; ++j) {
-//                if ((j == 0 && _is_even) || j > 0) {
-//                    _matches.emplace(row1[j], row2[j]);
-//                    swapped_matches.emplace(row2[j], row1[j]);
-//                    std::cout << row1[j] << row2[j] << " ";
-//                }
-//            }
-//            int shift_up = row2[0];
-//            int shift_down = row1[row1.size() - 1];
-//            for (unsigned int k = row1.size() - 1; k > 0; --k) { // move from right to left
-//                row1[k] = row1[k - 1];
-//            }
-//            for (unsigned int k = 1; k < row2.size(); ++k) {
-//                row2[k - 1] = row2[k];
-//            }
-//            row1[1] = shift_up;
-//            row2[static_cast<unsigned int>(_mid - 1)] = shift_down;
-//        }
-//        while (!swapped_matches.empty()) {
-//            _matches.emplace(swapped_matches.front());
-//            swapped_matches.pop();
-//        }
-//    }
+    void Schedule::initMatchupsBasic() { // brute force implementation
+        std::vector<int> row1;
+        std::vector<int> row2;
+        std::queue<std::pair<int, int>> swapped_matches{};
+        for (int i = 0; i < _n_teams; ++i) { // init indices
+            if (i < _mid) { row1.push_back(i); }
+            else { row2.push_back(i); }
+        }
+        std::reverse(row2.begin(), row2.end());
+        for (int i = 1; i < _n_teams; ++i) { // first matchups are already set, need to alternate 1 iteraton less
+            for (unsigned int j = 0; j < _mid; ++j) {
+                if ((j == 0 && _is_even) || j > 0) {
+                    _matches.emplace(row1[j], row2[j]);
+                    swapped_matches.emplace(row2[j], row1[j]);
+                    std::cout << row1[j] << row2[j] << " ";
+                }
+            }
+            int shift_up = row2[0];
+            int shift_down = row1[row1.size() - 1];
+            for (unsigned int k = row1.size() - 1; k > 0; --k) { // move from right to left
+                row1[k] = row1[k - 1];
+            }
+            for (unsigned int k = 1; k < row2.size(); ++k) {
+                row2[k - 1] = row2[k];
+            }
+            row1[1] = shift_up;
+            row2[static_cast<unsigned int>(_mid - 1)] = shift_down;
+        }
+        while (!swapped_matches.empty()) {
+            _matches.emplace(swapped_matches.front());
+            swapped_matches.pop();
+        }
+    }
 
 }

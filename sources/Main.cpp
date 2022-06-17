@@ -1,7 +1,6 @@
 #include <iostream>
 #include "League.hpp"
 #include "Team.hpp"
-#include "Game.hpp"
 
 using namespace my_league;
 

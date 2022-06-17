@@ -9,16 +9,15 @@ namespace my_league {
 
     private:
         int _n_teams;
-        bool _swap_teams;
         bool _is_even;
-        int _start;
-        int _end;
-        int _mid;
+        int _start{0};
+        int _end{0};
+        int _mid{0};
         std::queue<std::pair<int, int>> _matches;
 
-        void nextRound();
-
         void initMatchups();
+
+        void initMatchupsBasic();
 
     public:
 
