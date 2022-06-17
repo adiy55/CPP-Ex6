@@ -1,10 +1,7 @@
-// more than 20 teams
-// duplicate names, empty string, bad characters
-// test schedule order
-
 #include "doctest.h"
 #include "sources/League.hpp"
 #include "sources/Team.hpp"
+#include "sources/Game.hpp"
 
 using namespace my_league;
 
@@ -33,7 +30,7 @@ TEST_CASE ("Creating a League Cases") {
             SUBCASE("More than 20 teams") {
         std::shared_ptr<Team> extra_team = std::make_shared<Team>("extra", 0.66);
                 CHECK_THROWS((League{gsw, atl, bos, bkn, cha, chi, dal, den, lac, lal, mem,
-                                     mia, mil, min, nop, phi, phx, tor, uta, extra_team}));
+                                     mia, mil, min, nop, phi, phx, tor, uta, was, extra_team}));
     }
 
             SUBCASE("Less than 20 teams") { // should generate random teams
@@ -52,6 +49,12 @@ TEST_CASE ("Creating a League Cases") {
                                      mia, mil, min, nop, phi, phx, tor, uta, new_team2}));
                 CHECK_THROWS((League{gsw, atl, bos, bkn, cha, chi, dal, den, lac, lal, mem,
                                      mia, mil, min, nop, phi, phx, tor, uta, new_team1, new_team2}));
+    }
+
+            SUBCASE("Check number of games team played in season") {
+        League nba{gsw, atl, bos, bkn, cha, chi, dal, den, lac, lal, mem, mia, mil, min, nop, phi, phx, tor, uta, was};
+        nba.playAll();
+                CHECK_EQ(gsw->getTotalWins() + gsw->getTotalLosses(), 38); // plays against 19 teams twice
     }
 }
 
@@ -77,4 +80,29 @@ TEST_CASE ("Team Cases") {
                 CHECK_THROWS((Team{"⍺", 0.89}));
                 CHECK_THROWS((Team{"♕", 0.23}));
     }
+}
+
+TEST_CASE ("Game Cases") {
+
+    std::shared_ptr<Team> gsw = std::make_shared<Team>("Golden State Warriors", 0.99);
+    std::shared_ptr<Team> bos = std::make_shared<Team>("Boston Celtics", 0.91);
+
+    Game game{gsw, bos};
+    game.simulateGame();
+
+            SUBCASE("Check win/loss counter increment") {
+                CHECK(bool ((gsw->getTotalWins() == 1 || gsw->getTotalLosses() == 1)));
+                CHECK(bool ((bos->getTotalWins() == 1 || bos->getTotalLosses() == 1)));
+    }
+
+            SUBCASE("Check points scored in valid range") {
+                CHECK(bool ((gsw->getPtsScored() >= 55) || (gsw->getPtsScored() <= 110)));
+                CHECK(bool ((bos->getPtsScored() >= 55) || (bos->getPtsScored() <= 110)));
+    }
+
+            SUBCASE("Check points scored matches") {
+                CHECK(gsw->getPtsScored() == bos->getPtsOpponentScored());
+                CHECK(bos->getPtsScored() == gsw->getPtsOpponentScored());
+    }
+
 }
