@@ -48,7 +48,7 @@ namespace my_league {
 
         void displayAvgPtsPerGame();
 
-        void displayTopScoring(int n_first=5);
+        void displayTopScoring(int n_first = 5);
 
         friend std::ostream &operator<<(std::ostream &out, const League &league);
 

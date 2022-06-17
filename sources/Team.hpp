@@ -27,8 +27,6 @@ namespace my_league {
 
         const std::string &getName();
 
-        void setName(const std::string &name);
-
         double getRating();
 
         void addPoints(int scored, int opponent_scored);
@@ -50,8 +48,6 @@ namespace my_league {
         int getWinStreak() const;
 
         int getLossStreak() const;
-
-//    void setRating(double rating);
 
     };
 }

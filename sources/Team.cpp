@@ -7,8 +7,6 @@ namespace my_league {
 
     const std::string &Team::getName() { return _name; }
 
-    void Team::setName(const std::string &name) { _name = name; }
-
     double Team::getRating() { return _rating; }
 
     void Team::addPoints(int scored, int opponent_scored) {

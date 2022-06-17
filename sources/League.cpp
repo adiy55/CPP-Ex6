@@ -97,7 +97,6 @@ namespace my_league {
     void League::displayAvgPtsPerGame() {
         double avg = 0;
         for (const std::shared_ptr<Team> &team: _teams) {
-            // todo: check casting
             avg = static_cast<double >(team->getPtsScored()) / (team->getTotalWins() + team->getTotalLosses());
             std::cout << "Average ppg: " << avg << "   " << (*team).getName() << '\n';
         }
