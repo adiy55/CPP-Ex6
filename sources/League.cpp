@@ -34,6 +34,7 @@ namespace my_league {
     }
 
     void League::play() {
+        // https://stackoverflow.com/questions/37876288/is-there-a-one-liner-to-unpack-tuple-pair-into-references
         auto[home, away] = _schedule.nextMatchUp();
         Game game{_teams[static_cast<std::size_t>(home)], _teams[static_cast<std::size_t>(away)]};
         game.simulateGame();
@@ -110,6 +111,7 @@ namespace my_league {
         this->sortTeams();
     }
 
+    // https://stackoverflow.com/questions/47977829/generate-a-random-string-in-c11
     std::string League::generateRandomName() {
         std::string str("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
         std::random_device rd;
@@ -118,6 +120,7 @@ namespace my_league {
         return str.substr(0, 5);
     }
 
+    // https://en.cppreference.com/w/cpp/numeric/random/uniform_real_distribution
     double League::generateRandomRating() {
         std::random_device rd;  // Will be used to obtain a seed for the random number engine
         std::mt19937 gen(rd()); // Standard mersenne_twister_engine seeded with rd()
