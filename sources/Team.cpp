@@ -1,9 +1,10 @@
 #include "Team.hpp"
+#include <regex>
 
 namespace my_league {
 
     Team::Team(const std::string &name, double rating)
-            : _name{name}, _rating{rating} {}
+            : _name{name}, _rating{rating} { this->checkInput(); }
 
     const std::string &Team::getName() { return _name; }
 
@@ -44,5 +45,16 @@ namespace my_league {
     int Team::getPtsScored() const { return _pts_scored; }
 
     int Team::getPtsOpponentScored() const { return _pts_opponent_scored; }
+
+    void Team::checkInput() const {
+        if (_rating < 0.0 || _rating > 1.0) { throw std::invalid_argument{"Rating should be between 0 and 1!"}; }
+        this->validateName();
+    }
+
+    void Team::validateName() const {
+        std::regex valid_format{R"([\w][\w\s_]*)"}; // \w = shorthand for alpha or digits
+        // regex_match checks for a full match
+        if (!std::regex_match(_name, valid_format)) { throw std::invalid_argument{"Invalid name!"}; }
+    }
 
 }

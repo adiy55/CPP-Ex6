@@ -21,6 +21,10 @@ namespace my_league {
         int _total_wins{0};
         int _total_losses{0};
 
+        void checkInput() const;
+
+        void validateName() const;
+
     public:
 
         Team(const std::string &name, double rating);
