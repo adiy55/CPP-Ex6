@@ -1,21 +1,23 @@
 #include "Game.hpp"
+#include "Constants.cpp"
+
+using namespace constants;
 
 namespace my_league {
 
     Game::Game(std::shared_ptr<Team> &home, std::shared_ptr<Team> &away)
-            : _home{home}, _away{away}, _pts_home{0}, _pts_away{0} {}
+            : _home{home}, _away{away} {}
 
     void Game::simulateGame() {
         std::random_device rd{};
         std::mt19937 gen{rd()};
-        std::normal_distribution<> home_d{77.5, 4.5};
-        std::normal_distribution<> away_d{75, 5};
+        std::normal_distribution<> home_d{HOME_MEAN, HOME_STD}; // generate home team score
+        std::normal_distribution<> away_d{AWAY_MEAN, AWAY_STD}; // generate away team score
         _pts_home = static_cast<int>(std::round(home_d(gen)));
         _pts_away = static_cast<int>(std::round(away_d(gen)));
-        if (_home->getRating() >= _away->getRating()) { _pts_home += 10; }
-        else { _pts_away += 10; }
-        this->updateResults();
-//        std::cout << "home: " << _pts_home << ", away: " << _pts_away << '\n';
+        if (_home->getRating() >= _away->getRating()) { _pts_home += BONUS; } // add 10 pts to team with higher rating
+        else { _pts_away += BONUS; }
+        this->updateResults(); // update team stats
     }
 
     void Game::updateResults() {
@@ -33,5 +35,4 @@ namespace my_league {
 
     }
 
-    // todo: win/loss counter + pts
 }

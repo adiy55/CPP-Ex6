@@ -6,9 +6,9 @@ namespace my_league {
     Team::Team(const std::string &name, double rating)
             : _name{name}, _rating{rating} { this->checkInput(); }
 
-    const std::string &Team::getName() { return _name; }
+    const std::string &Team::getName() const { return _name; }
 
-    double Team::getRating() { return _rating; }
+    double Team::getRating() const { return _rating; }
 
     void Team::addPoints(int scored, int opponent_scored) {
         _pts_scored += scored;

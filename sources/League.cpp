@@ -6,8 +6,7 @@ using constants::MAX_PLAYERS;
 
 namespace my_league {
 
-    League::League(const std::initializer_list<std::shared_ptr<Team>> &teams)
-            : _schedule{} {
+    League::League(const std::initializer_list<std::shared_ptr<Team>> &teams) {
         int counter = 0;
         for (const std::shared_ptr<Team> &team: teams) {
             if (counter >= MAX_PLAYERS) { throw std::runtime_error{"Exceeded max number of teams!"}; }
@@ -36,9 +35,6 @@ namespace my_league {
 
     void League::play() {
         auto[home, away] = _schedule.nextMatchUp();
-//        std::cout << "\nPlaying: "
-//                  << "Home: no." << home << " " << *_teams[static_cast<std::size_t>(home)] << ", Away: no." << away
-//                  << " " << *_teams[static_cast<std::size_t>(away)];
         Game game{_teams[static_cast<std::size_t>(home)], _teams[static_cast<std::size_t>(away)]};
         game.simulateGame();
     }
@@ -58,7 +54,7 @@ namespace my_league {
             int a_diff = a->getTotalWins() - a->getTotalLosses();
             int b_diff = b->getTotalWins() - b->getTotalLosses();
             if (a_diff > b_diff) { return true; }
-            else if (b_diff > a_diff) { return false; }
+            if (b_diff > a_diff) { return false; }
             return a->getPtsScored() - a->getPtsOpponentScored() >= b->getPtsScored() - b->getPtsOpponentScored();
         });
     }
@@ -102,12 +98,12 @@ namespace my_league {
         }
     }
 
-    void League::displayTopScoring(int n_teams) {
+    void League::displayTopScoring(int n_first) {
         std::sort(_teams.begin(), _teams.end(),
                   [](std::shared_ptr<Team> &a, std::shared_ptr<Team> &b) {
                       return a->getPtsScored() > b->getPtsScored();
                   });
-        for (unsigned int i = 0; i < n_teams; ++i) {
+        for (unsigned int i = 0; i < n_first; ++i) {
             std::shared_ptr<Team> &team = _teams[i];
             std::cout << (i + 1) << ". " << team->getName() << ": Scored " << team->getPtsScored() << " points\n";
         }
@@ -126,14 +122,14 @@ namespace my_league {
         std::random_device rd;  // Will be used to obtain a seed for the random number engine
         std::mt19937 gen(rd()); // Standard mersenne_twister_engine seeded with rd()
         std::uniform_real_distribution<> dis(0.0, 1.0);
-        return std::round(dis(gen) * 100.0) / 100.0;
+        return std::round(dis(gen) * 100.0) / 100.0; // round to 2 digits
     }
 
     void League::fillMissingTeams(int counter) {
         while (counter < MAX_PLAYERS) {
             std::string new_name = generateRandomName();
             if (_team_names.count(new_name) == 0) {
-                _teams.push_back(std::make_shared<Team>(new_name, generateRandomRating())); // todo: check for leaks
+                _teams.push_back(std::make_shared<Team>(new_name, generateRandomRating()));
                 _team_names.emplace(new_name);
                 ++counter;
             }

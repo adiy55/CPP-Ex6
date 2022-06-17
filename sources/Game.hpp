@@ -12,8 +12,8 @@ namespace my_league {
     private:
         std::shared_ptr<Team> _home;
         std::shared_ptr<Team> _away;
-        int _pts_home;
-        int _pts_away;
+        int _pts_home{0};
+        int _pts_away{0};
 
         void updateResults();
 

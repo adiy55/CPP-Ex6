@@ -13,7 +13,7 @@ namespace my_league {
             ++_n_teams;
             _is_even = false;
         }
-        _start = 1;
+        _start = 1; // first index is fixed
         _end = _n_teams - 1;
         _mid = static_cast<int>(_n_teams / 2);
         this->initMatchups();
@@ -64,7 +64,7 @@ namespace my_league {
             else { row2.push_back(i); }
         }
         std::reverse(row2.begin(), row2.end());
-        for (int i = 1; i < _n_teams; ++i) { // first matchups are already set, need to alternate 1 iteraton less
+        for (int i = 1; i < _n_teams; ++i) { // first matchups are already set, need to alternate 1 iteration less
             for (unsigned int j = 0; j < _mid; ++j) {
                 if ((j == 0 && _is_even) || j > 0) {
                     _matches.emplace(row1[j], row2[j]);

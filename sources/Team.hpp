@@ -29,9 +29,9 @@ namespace my_league {
 
         Team(const std::string &name, double rating);
 
-        const std::string &getName();
+        const std::string &getName() const;
 
-        double getRating();
+        double getRating() const;
 
         void addPoints(int scored, int opponent_scored);
 
