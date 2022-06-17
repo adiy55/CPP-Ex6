@@ -8,7 +8,7 @@
 
 using namespace my_league;
 
-TEST_CASE ("More than 20 teams") {
+TEST_CASE ("Creating a League Cases") {
     std::shared_ptr<Team> gsw = std::make_shared<Team>("Golden State Warriors", 0.99);
     std::shared_ptr<Team> atl = std::make_shared<Team>("Atlanta Hawks", 0.79);
     std::shared_ptr<Team> bos = std::make_shared<Team>("Boston Celtics", 0.91);
@@ -30,4 +30,51 @@ TEST_CASE ("More than 20 teams") {
     std::shared_ptr<Team> uta = std::make_shared<Team>("Utah Jazz", 0.8);
     std::shared_ptr<Team> was = std::make_shared<Team>("Washington Wizards", 0.66);
 
+            SUBCASE("More than 20 teams") {
+        std::shared_ptr<Team> extra_team = std::make_shared<Team>("extra", 0.66);
+                CHECK_THROWS((League{gsw, atl, bos, bkn, cha, chi, dal, den, lac, lal, mem,
+                                     mia, mil, min, nop, phi, phx, tor, uta, extra_team}));
+    }
+
+            SUBCASE("Less than 20 teams") { // should generate random teams
+                CHECK_NOTHROW((League{})); // no teams
+                CHECK_NOTHROW((League{gsw, atl, bos, bkn, cha, chi, dal, den, lac, lal, mem,
+                                      mia, mil, min, nop, phi, phx, tor, uta})); // 19 teams
+
+    }
+
+            SUBCASE("Duplicate Team Name") {
+        std::shared_ptr<Team> new_team1 = std::make_shared<Team>("Golden State Warriors", 0.99); // same name and rating
+        std::shared_ptr<Team> new_team2 = std::make_shared<Team>("Boston Celtics", 0.9); // same name
+                CHECK_THROWS((League{gsw, atl, bos, bkn, cha, chi, dal, den, lac, lal, mem,
+                                     mia, mil, min, nop, phi, phx, tor, uta, new_team1}));
+                CHECK_THROWS((League{gsw, atl, bos, bkn, cha, chi, dal, den, lac, lal, mem,
+                                     mia, mil, min, nop, phi, phx, tor, uta, new_team2}));
+                CHECK_THROWS((League{gsw, atl, bos, bkn, cha, chi, dal, den, lac, lal, mem,
+                                     mia, mil, min, nop, phi, phx, tor, uta, new_team1, new_team2}));
+    }
+}
+
+
+TEST_CASE ("Team Cases") {
+
+            SUBCASE("Invalid Name") {
+                CHECK_THROWS((Team{"", 0.25}));
+                CHECK_THROWS((Team{"   ", 0.56}));
+                CHECK_THROWS((Team{"$$$$", 0.32}));
+    }
+
+            SUBCASE("Invalid Rating") {
+                CHECK_THROWS((Team{"Golden State Warriors", 999999}));
+                CHECK_THROWS((Team{"Dallas Mavericks", 987.654}));
+                CHECK_THROWS((Team{"Los Angeles Lakers", -87.12}));
+    }
+
+            SUBCASE("Not printable") {
+                CHECK_THROWS((Team{"✡", 0.66}));
+                CHECK_THROWS((Team{"☞", 0.45}));
+                CHECK_THROWS((Team{"☜", 0.78}));
+                CHECK_THROWS((Team{"⍺", 0.89}));
+                CHECK_THROWS((Team{"♕", 0.23}));
+    }
 }
