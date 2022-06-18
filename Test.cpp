@@ -97,7 +97,7 @@ TEST_CASE ("Game Cases") {
 
             SUBCASE("Check points scored in valid range") {
                 CHECK(bool ((gsw->getPtsScored() >= 55) || (gsw->getPtsScored() <= 110)));
-                CHECK(bool ((bos->getPtsScored() >= 55) || (bos->getPtsScored() <= 110)));
+                CHECK(bool ((bos->getPtsScored() >= 50) || (bos->getPtsScored() <= 110)));
     }
 
             SUBCASE("Check points scored matches") {

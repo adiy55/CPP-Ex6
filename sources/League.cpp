@@ -10,9 +10,9 @@ namespace my_league {
         int counter = 0;
         for (const std::shared_ptr<Team> &team: teams) {
             if (counter >= MAX_PLAYERS) { throw std::runtime_error{"Exceeded max number of teams!"}; }
-            _teams.emplace_back(team);
             this->checkValidName(team->getName());
             _team_names.emplace(team->getName());
+            _teams.emplace_back(team);
             ++counter;
         }
         this->fillMissingTeams(counter);
@@ -43,7 +43,7 @@ namespace my_league {
     void League::playAll() {
         // _teams.size()-1 = num of rounds, _teams.size()/2 = games per round
         int n_teams = static_cast<int>(_teams.size());
-        int games_per_season = (n_teams - 1) * (n_teams / 2) * 2;
+        int games_per_season = (n_teams - 1) * (n_teams);
         for (int i = 0; i < games_per_season; ++i) {
             this->play();
         }
@@ -68,17 +68,17 @@ namespace my_league {
     }
 
     void League::displayLongestWinningStreak() {
-        int longest = 0, curr_longest = 0;
-        std::for_each(_teams.cbegin(), _teams.cend(), [&longest, &curr_longest](const std::shared_ptr<Team> &team) {
-            if (team->getWinStreak() > curr_longest) { longest = curr_longest = team->getWinStreak(); }
+        int longest = 0;
+        std::for_each(_teams.cbegin(), _teams.cend(), [&longest](const std::shared_ptr<Team> &team) {
+            if (team->getWinStreak() > longest) { longest = team->getWinStreak(); }
         });
         std::cout << "The longest winning streak is: " << longest << '\n';
     }
 
     void League::displayLongestLosingStreak() {
-        int longest = 0, curr_longest = 0;
-        std::for_each(_teams.cbegin(), _teams.cend(), [&longest, &curr_longest](const std::shared_ptr<Team> &team) {
-            if (team->getLossStreak() > curr_longest) { longest = curr_longest = team->getLossStreak(); }
+        int longest = 0;
+        std::for_each(_teams.cbegin(), _teams.cend(), [&longest](const std::shared_ptr<Team> &team) {
+            if (team->getLossStreak() > longest) { longest = team->getLossStreak(); }
         });
         std::cout << "The longest losing streak is: " << longest << '\n';
     }
@@ -113,18 +113,18 @@ namespace my_league {
 
     // https://stackoverflow.com/questions/47977829/generate-a-random-string-in-c11
     std::string League::generateRandomName() {
-        std::string str("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
+        std::string str{"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"};
         std::random_device rd;
-        std::mt19937 generator(rd());
+        std::mt19937 generator{rd()};
         std::shuffle(str.begin(), str.end(), generator);
         return str.substr(0, 5);
     }
 
     // https://en.cppreference.com/w/cpp/numeric/random/uniform_real_distribution
     double League::generateRandomRating() {
-        std::random_device rd;  // Will be used to obtain a seed for the random number engine
-        std::mt19937 gen(rd()); // Standard mersenne_twister_engine seeded with rd()
-        std::uniform_real_distribution<> dis(0.0, 1.0);
+        std::random_device rd;  // will be used to obtain a seed for the random number engine
+        std::mt19937 gen{rd()}; // standard mersenne_twister_engine seeded with rd()
+        std::uniform_real_distribution<> dis{0.0, 1.0};
         return std::round(dis(gen) * 100.0) / 100.0; // round to 2 digits
     }
 

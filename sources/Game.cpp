@@ -21,18 +21,15 @@ namespace my_league {
     }
 
     void Game::updateResults() {
+        _home->addPoints(_pts_home, _pts_away);
+        _away->addPoints(_pts_away, _pts_home);
         if (_pts_home >= _pts_away) { // tie-breaker: home team wins
             _home->addWin();
-            _home->addPoints(_pts_home, _pts_away);
             _away->addLoss();
-            _away->addPoints(_pts_away, _pts_home);
         } else {
             _home->addLoss();
-            _home->addPoints(_pts_home, _pts_away);
             _away->addWin();
-            _away->addPoints(_pts_away, _pts_home);
         }
-
     }
 
 }
